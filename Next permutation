@@ -1,0 +1,32 @@
+Start by finding the rightmost element (i) that is smaller than its next element (nums[i] < nums[i+1]). This will be the first decrease from the end, indicating where we can make the next permutation.
+If such an element exists, find the smallest element from the end of the array (j) that is larger than nums[i].
+Swap nums[i] and nums[j] to get the smallest larger number.
+Reverse the subarray to the right of i to get the smallest lexicographical order for the remaining digits, completing the next permutation.
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        if (nums == null || nums.length <= 1) // If array has 1 or no elements, return as is
+            return;
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) // Find the first decreasing element from end
+            i--;
+        if (i >= 0) { // If such element exists
+            int j = nums.length - 1;
+            while (nums[j] <= nums[i]) // Find smallest number greater than nums[i] to the right
+                j--;
+            swap(nums, i, j); // Swap them to get the next lexicographical order
+        }
+        reverse(nums, i + 1, nums.length - 1); // Reverse the elements after `i` for minimal order
+    }
+    
+    public void swap(int[] nums, int i, int j) { // Swaps elements at indices i and j
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+    
+    public void reverse(int[] nums, int i, int j) { // Reverses elements between indices i and j
+        while (i < j)
+            swap(nums, i++, j--);
+    }
+}
