@@ -1,0 +1,18 @@
+Initialize profit to 0 and mini to the first price in the array.
+Iterate through each price starting from the second day.
+For each price, calculate the profit if you bought at the minimum price seen so far (mini) and sold today. Update profit if this is the maximum seen so far.
+Update mini with the minimum of itself or the current price.
+Return profit, which will contain the maximum profit found.
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        int mini = prices[0];
+
+        for(int i = 1; i < prices.length; i++) {
+            profit = Math.max(profit, prices[i] - mini);
+            mini = Math.min(mini, prices[i]);
+        }
+        return profit;
+    }
+}
