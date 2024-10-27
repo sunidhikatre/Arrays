@@ -1,0 +1,25 @@
+to find all subarrays with sum k is to use a hash map to store cumulative sums and their frequencies.
+This way, you can efficiently find if there exists a subarray sum equal to k at each step by using the difference between the current cumulative sum and k.
+
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int cnt = 0;
+        int currentSum = 0;
+        map.put(0, 1);
+
+        for (int num : nums) {
+            currentSum += num;
+
+            if(map.containsKey(currentSum - k)) {
+                cnt += map.get(currentSum - k); 
+            }
+
+            map.put(currentSum, map.getOrDefault(currentSum, 0)+1);
+
+        }
+        return cnt;
+    }
+    
+}
