@@ -1,0 +1,32 @@
+Add all elements to a HashSet to enable O(1) lookups.
+Initialize maxi to store the longest sequence length found.
+For each element, if it's the start of a sequence (num - 1 is not in the set), count the length of that sequence.
+Update maxi with the longest sequence found during the loop.
+Return maxi as the length of the longest consecutive sequence.
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int cnt = 0;
+        int maxi = 0;
+        int currentNum = 0;
+
+        for(int i=0; i< nums.length; i++) {
+            set.add(nums[i]);
+        }
+
+        for(int i=0; i<nums.length; i++) {
+            currentNum = nums[i];
+            cnt = 1;
+            if(!set.contains(nums[i]-1)) {
+                while(set.contains(currentNum + 1)){
+                    currentNum++;
+                    cnt++;
+                }
+            }
+            maxi = Math.max(maxi, cnt);
+        }
+       
+        return maxi;
+    }
+}
