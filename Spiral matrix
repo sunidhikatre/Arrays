@@ -1,0 +1,52 @@
+Initialize boundaries for the top, bottom, left, and right of the matrix.
+Loop while the boundaries are valid (i.e., top <= bottom and left <= right).
+Traverse each edge (left-to-right, top-to-bottom, right-to-left, and bottom-to-top) in the current boundary and adjust the boundary after each traversal.
+Stop when boundaries overlap (indicating all elements are visited).
+Return the result list.
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int left = 0;
+        int right = m - 1;
+        int top = 0;
+        int bottom = n-1;
+        List<Integer> l = new ArrayList<>();
+
+        while(top <= bottom && left <=right) {
+            for(int i = left; i<=right; i++) {
+                l.add(matrix[top][i]);
+            }
+            System.out.println("left to right" +l);
+            top++;
+
+            for(int i=top; i<= bottom; i++) {
+                l.add(matrix[i][right]);
+            }
+            System.out.println("top to bottom" +l);
+
+            right--;
+
+            if(top<=bottom){
+                for(int i = right; i>=left; i--) {
+                  l.add(matrix[bottom][i]);
+                }
+                System.out.println("right to left" + l);
+
+                bottom--;
+            }
+
+            if(left<=right) {
+                for(int i=bottom; i>=top; i--) {
+                    l.add(matrix[i][left]);
+                }
+                System.out.println("bottom to top" +l);
+
+                left++;
+            }
+           
+        }
+        return l;
+    }
+}
