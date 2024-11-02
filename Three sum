@@ -1,0 +1,47 @@
+Sort the Array: Sort nums to make it easier to avoid duplicates and use the two-pointer approach.
+Iterate through Array with a Loop: For each element nums[i], treat it as the first element of the triplet and skip duplicates.
+Use Two-Pointer Technique: Initialize two pointers j and k for the remaining part of the array (after i). Move j (from left) and k (from right) to find pairs that sum with nums[i] to zero.
+Add Valid Triplets: If nums[i] + nums[j] + nums[k] == 0, add the triplet to the result. Then, increment j and decrement k while skipping duplicates.
+Adjust Pointers Based on Sum: If the sum is less than zero, increment j to increase the sum; if greater than zero, decrement k to decrease the sum.
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+
+        for(int i = 0; i< nums.length; i++) {
+            if(i  >  0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            int j = i + 1;
+            int k = nums.length - 1;
+
+            while(j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+
+                if(sum < 0) {
+                    j++;
+                } else if(sum > 0) {
+                    k--;
+                } else {
+                    List<Integer> l = new ArrayList<>();
+                    Collections.addAll(l, nums[i], nums[j], nums[k]);
+                    res.add(l);
+                    j++;
+                    k--;
+
+                    while(j < k && nums[j] == nums[j-1]) {
+                        j++;
+                    }
+
+                    while(j < k && nums[k] == nums[k+1]) {
+                        k--;
+                    }
+                   
+                }
+
+            }
+        }
+        return res;
+    }
+}
