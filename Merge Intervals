@@ -1,0 +1,28 @@
+Sort the Intervals: Begin by sorting the intervals based on their starting values to ensure they are processed in order.
+Initialize Variables: Use two variables to track the current start and end of the merged interval.
+Iterate Through Intervals: Loop through the sorted intervals; if the current interval does not overlap with the merged interval, add the merged interval to the result list.
+Merge Overlapping Intervals: If there is an overlap, update the end of the merged interval to the maximum end value between the current merged interval and the overlapping interval.
+Return Merged Intervals: After processing all intervals, convert the list of merged intervals into a 2D array and return it.
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a,b)->a[0]-b[0]);
+
+        int start = intervals[0][0];
+        int end = intervals[0][1];
+        ArrayList<int[]>list = new ArrayList<>();
+
+        for(int i = 1; i < intervals.length; i++) {
+            if(end < intervals[i][0]) {
+                list.add(new int[]{start, end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            } else{
+                end = Math.max(end, intervals[i][1]);
+            }
+        }
+         list.add(new int[]{start, end});
+        int res[][]=new int[list.size()][];
+        return list.toArray(res);
+    }
+}
