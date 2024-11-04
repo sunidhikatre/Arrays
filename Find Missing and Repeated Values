@@ -1,0 +1,42 @@
+Initialize Frequency Array: Create an array arr of size n * n + 1 to count occurrences of each number from 1 to 
+𝑛
+×
+𝑛
+n×n in the grid.
+Count Elements in Grid: Iterate through the grid and update arr with counts for each element in grid[i][j].
+Find Repeated Element: Traverse arr to find the number that appears twice and set it in ans[0].
+Find Missing Element: Traverse arr again to find the number that appears zero times and set it in ans[1].
+Return Result: Return the array ans containing the repeated and missing numbers.
+
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int n = grid.length;
+
+        int[] arr = new int[n*n + 1];
+
+        int num = 0;
+        for(int i=0; i<n;i++) {
+            for(int j=0;j<n;j++){
+                num = grid[i][j];
+                arr[num]++;
+            }
+        }
+
+        int []ans = new int[2];
+        for(int i = 1; i <= n*n; i++){
+            if(arr[i] == 2){
+                ans[0] = i;
+                break;
+            }
+        }
+
+         for(int i = 1; i <= n*n; i++){
+            if(arr[i] == 0){
+                ans[1] = i;
+                break;
+            }
+        }
+
+        return ans;
+    }
+}
