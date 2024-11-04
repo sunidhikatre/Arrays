@@ -1,0 +1,26 @@
+Initialize Pointers: Set pointers at the end of the valid elements in nums1 (m-1), the end of nums2 (n-1), and the end of the combined array in nums1 (m+n-1).
+Merge from End: Compare elements from the end of nums1 and nums2. Place the larger element at the end of nums1 and move the respective pointer backward.
+Continue Until One Array is Exhausted: Repeat until all elements from either nums1 or nums2 are placed.
+Copy Remaining Elements of nums2: If nums2 still has remaining elements, copy them to the start of nums1 (this handles cases where all elements in nums2 are smaller than those in nums1).
+Result: nums1 now contains all elements in sorted order, merged in place.
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        while (m>0 && n>0){
+            if (nums1[m-1]>=nums2[n-1]){
+                nums1[m+n-1] = nums1[m-1];
+                m--;
+            }
+            else {
+                nums1[m+n-1] = nums2[n-1];
+                n--;
+            }
+        }
+
+        if(n>0) {
+            for(int i=0; i<n;i++){
+                nums1[i] = nums2[i]; 
+            }
+        }
+    }
+}
