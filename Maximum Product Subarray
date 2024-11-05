@@ -1,0 +1,30 @@
+Initialize maxProd to the smallest integer, and two running products leftToRight and rightToLeft to 1.
+Traverse the array left-to-right and right-to-left simultaneously to track both products.
+If either leftToRight or rightToLeft becomes zero, reset it to 1.
+Update maxProd with the maximum of the current leftToRight, rightToLeft, and maxProd.
+Return maxProd after the loop completes.
+
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        int n = nums.length;
+
+        int maxProd = Integer.MIN_VALUE;
+        int leftToRight = 1;
+        int rightToLeft = 1;
+
+        for(int i = 0; i < nums.length; i++) {
+            if (leftToRight == 0)
+                leftToRight = 1;
+            if (rightToLeft == 0)
+                rightToLeft = 1;
+            
+            leftToRight*=nums[i];
+            rightToLeft *= nums[n-i-1];
+
+            maxProd = Math.max(maxProd, Math.max(leftToRight, rightToLeft));
+        }
+
+        return maxProd;
+    }
+}
