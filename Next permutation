@@ -1,4 +1,5 @@
-Start by finding the rightmost element (i) that is smaller than its next element (nums[i] < nums[i+1]). This will be the first decrease from the end, 
+Start by finding the rightmost element (i) that is smaller than its next element (nums[i] < nums[i+1]).
+This will be the first decrease from the end, 
 indicating where we can make the next permutation.
 If such an element exists, find the smallest element from the end of the array (j) that is larger than nums[i].
 Swap nums[i] and nums[j] to get the smallest larger number.
