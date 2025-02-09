@@ -1,0 +1,39 @@
+Use Prefix Sum:
+
+Maintain a running sum (prefixSum) to track cumulative sums of elements.
+Use HashMap (map) to store prefixSum → first occurrence index mapping.
+
+This helps in checking if a previous subarray sum (prefixSum - k) exists.
+Iterate through the array:
+
+Update prefixSum with arr[i].
+If (prefixSum - k) exists in map, it means there's a subarray summing to k.
+Calculate its length: i - map.get(prefixSum - k).
+Update maxLength if needed.
+Store prefixSum in map if it's not already present to keep the earliest index.
+Edge Case Handling:
+
+Initialize map.put(0, -1), ensuring cases where prefixSum == k are handled.
+If no valid subarray is found, return 0.
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        int prefixSum = 0;
+        int maxLength = 0;
+        
+        for(int i = 0; i < arr.length; i++) {
+            prefixSum += arr[i];
+            
+            if(map.containsKey(prefixSum - k)) {
+                maxLength = Math.max(maxLength, i - map.get(prefixSum - k));
+            }
+            
+            map.putIfAbsent(prefixSum, i);
+        }
+        return maxLength;
+    }
+}
