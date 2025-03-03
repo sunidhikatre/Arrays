@@ -1,5 +1,6 @@
 Initialize a counter (cnt) and a candidate element (ele) to track the current majority candidate.
-Iterate through the array, adjusting the counter based on whether the current element matches the candidate: increment cnt if it matches and decrement if it doesn’t; reset the candidate when cnt reaches zero.
+Iterate through the array, adjusting the counter based on whether the current element matches the candidate:
+increment cnt if it matches and decrement if it doesn’t; reset the candidate when cnt reaches zero.
 After the first pass, ele contains a potential majority candidate.
 Verify the candidate by counting its occurrences in a second pass through the array.
 If the count exceeds half the array size, return the candidate; otherwise, return -1.
