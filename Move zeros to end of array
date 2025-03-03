@@ -1,18 +1,13 @@
+j always tracks the position where the next non-zero element should be placed.
+As we iterate, every non-zero element gets swapped with nums[j], effectively pushing zeros to the end.
+
 class Solution {
     public void moveZeroes(int[] nums) {
-        int j = -1;
-        for(int i = 0; i < nums.length; i++) {
-            if(nums[i] == 0) {
-                j = i;
-                break;
-            }
-        }
-        if(j == -1){
-            return;
-        }
+        int j = 0; // Pointer for the position to place non-zero
 
-        for(int i = j + 1; i< nums.length; i++) {
-            if(nums[i] != 0){
+        // Move non-zero elements forward
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
                 int temp = nums[i];
                 nums[i] = nums[j];
                 nums[j] = temp;
